@@ -1,7 +1,7 @@
-local CStructer = {}
+local TlmGen = {}
 local ffi = require("ffi")
 
-function CStructer._extract_validate_struct_type(struct_data)
+function TlmGen._extract_validate_struct_type(struct_data)
     assert(type(struct_data) == "table", "Error: bad type for struct_data")
     local struct_type = struct_data[1].sdef
     for _, member in ipairs(struct_data) do
@@ -10,7 +10,7 @@ function CStructer._extract_validate_struct_type(struct_data)
     return struct_type
 end
 
-function CStructer._extract_validate_struct_size(struct_data)
+function TlmGen._extract_validate_struct_size(struct_data)
     assert(type(struct_data) == "table", "Error: bad type for struct_data")
     local size = 0
     for _, member in ipairs(struct_data) do
@@ -19,7 +19,7 @@ function CStructer._extract_validate_struct_size(struct_data)
     return size
 end
 
-function CStructer._extract_validate_struct_init(struct_data)
+function TlmGen._extract_validate_struct_init(struct_data)
     local vals = {}
     for _, member in ipairs(struct_data) do
         table.insert(vals, member.init)
@@ -27,7 +27,7 @@ function CStructer._extract_validate_struct_init(struct_data)
     return vals
 end
 
-function CStructer._extract_validate_struct_mems(struct_data)
+function TlmGen._extract_validate_struct_mems(struct_data)
     assert(type(struct_data) == "table", "Error: bad type for struct_data")
     local members, indent = {}, "       "
     for _, member in ipairs(struct_data) do
@@ -37,4 +37,4 @@ function CStructer._extract_validate_struct_mems(struct_data)
     return table.concat(members, "\n")
 end
 
-return CStructer
+return TlmGen

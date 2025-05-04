@@ -1,6 +1,6 @@
-local CStructer = {}
+local TlmGen = {}
 local ffi = require("ffi")
-local utl = require("cstructer.structer_utils")
+local utl = require("tlmgen.tlmgen_utils")
 
 local function create_cdef(struct_mems, struct_type, struct_size)
     local cdef = string.format(
@@ -59,7 +59,7 @@ local _metatable = {
     __tostring = _peek,
 }
 
-function CStructer.create_struct(struct_data)
+function TlmGen.create_struct(struct_data)
     local struct_size = utl._extract_validate_struct_size(struct_data)
     local struct_type = utl._extract_validate_struct_type(struct_data)
     local struct_vals = utl._extract_validate_struct_init(struct_data)
@@ -69,4 +69,4 @@ function CStructer.create_struct(struct_data)
     return ffi.metatype(ffi.typeof(struct_type), _metatable), struct_vals
 end
 
-return CStructer
+return TlmGen
